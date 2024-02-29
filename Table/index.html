@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #main {
+        height: 100vh;
+        width: 100%;
+        background: linear-gradient(to bottom, rgba(0, 128, 0, 0.539), rgba(255, 0, 0, 0.562), rgba(0, 0, 255, 0.557), rgba(0, 0, 0, 0.379), yellow);
+        display: flex;
+        flex-direction: row;
+    }
+
+    .left{
+        display: flex;
+        flex-direction: column;
+        height: 90%;
+        width: 33%;
+    }
+    .right{
+        width: 100%;
+        margin-right: 3%;
+        height:93%;
+        margin-top: .5%;
+        background:  rgba(255, 255, 255, 0.413);
+        border: 1.5px solid black;
+        border-radius: 30px;
+        padding: 15px 35px;
+        overflow: auto;
+    }
+    .form ,.additional{
+        width: 70%;
+        height: fit-content;
+        background: rgba(255, 255, 255, 0.413);
+        padding: 30px 40px;
+        border: 1.5px solid black;
+        border-radius: 30px;
+        margin: 10px 20px;
+    }
+    #row,#col{
+        width: 200px;
+        height: 25px;
+        border-radius: 30px;
+        padding: 0px 10px;
+    }
+    button{
+        height: 25px;
+        width: 130px;
+        font-size: 15px;
+        font-weight: 600px;
+        color: white;
+        background: black;
+        border-radius: 30px;
+
+    }
+
+
+    #text {
+        display: flexbox;
+        width: 700px;
+        color: black;
+        font-size: 40px;
+        }
+    .button{
+        display: flex;
+        flex-direction: row;
+        column-gap: 20px;
+        margin-left: 10px;
+    }
+    #submit{
+        margin-left: 70px;
+        margin-top: 15px;
+    }
+</style>
+
+<body>
+    <div id="main">
+        <div class="left">
+            <div class="form">
+                <input type="number" placeholder="Row" id="row"><br><br>
+                <input type="number" placeholder="Colunm" id="col"><br><br>
+                <input type="radio" name="oder" value="asc">Acsending 
+                <input type="radio" name="oder" value="desc">Decsending<br><br>
+                <button onclick="myClick()" id="submit">Submit</button>
+            </div>
+            <div class="additional">
+                <h1>About me </h1>
+                    <p>I am Shubham Vishwkarma  currentally working on mern stack project (Estate).  </p>
+                <p> All Content Resevered @ 2024 and devloped by shubham Vishwkarma </p>
+            </div>
+        </div>
+        <div class="right">
+            <div id="text"></div>
+        </div>
+    </div>
+
+    <script>
+        function myClick() {
+            var row = document.getElementById("row").value;
+            var col = document.getElementById("col").value;
+            var order = document.querySelector('input[name="oder"]:checked').value;
+
+            var table = "<table border='1' style='font-size:30px; text-align:center;color:black;'>";
+            var k = 1
+            if (row <= 25 && col <= 25) {
+                if (order === 'desc') {
+                    var k = row * col;
+                    for (i = 0; i < row; i++) {
+                        table += "<tr>";
+                        for (j = 0; j < col; j++) {
+                            table += "<td>" + (k) + "</td>";
+                            k--;
+                        }
+                        table += "</tr>";
+                    }
+                    table += '</table>';
+                    
+                }
+                else {
+                    for (i = 0; i < row; i++) {
+                        table += "<tr>";
+                        for (j = 0; j < col; j++) {
+                            //p += k + " ";
+                            table += "<td>" + (k) + "</td>";
+                            k++;
+                        }
+                        table += "</tr>";
+                    }
+                    table += '</table>';
+
+                }
+                document.getElementById("text").innerHTML = table;
+                odd=()=>{
+                    for(let i=0;i<table.rows.length;i++){
+                        for(let j=0;j<table.rows.cells.length;j++){
+                            let n=parseInt(table.row[i].cells[j].textContent);
+                            if(n%2!==0){
+                                table.row[i].cells[j].textContent.style.color='red'
+                            }
+                        }
+                    }
+
+                }
+            }
+            else {
+                document.getElementById("text").innerHTML = "You can Enter maximum number of 15 Rows and 16 Colunms";
+                document.getElementById("text").style.color = "red";
+                document.getElementById("text").style.fontSize = '30px';
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>

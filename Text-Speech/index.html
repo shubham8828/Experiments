@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Speech</title>
+</head>
+<style>
+    body {
+        height: 95vh;
+        width: 99%;
+        background: linear-gradient(45deg,
+                rgba(255, 0, 0, 0.752),
+                rgba(0, 0, 255, 0.752),
+                rgba(0, 128, 0, 0.720),
+                rgba(255, 255, 0, 0.766));
+    }
+    h1{
+        text-align: center;
+    }
+    .container{
+        margin: 3%;
+        border: 2px solid black;
+        height: 90vh;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.406);
+    }
+
+    #text-to-speech {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
+    }
+
+    #text {
+        margin-top: 50px;
+        width: 800px;
+        height: 300px;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 30px;
+    }
+
+    #speak-button {
+        width: 100px;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 20px;
+        background-color: green;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    #speak-button:hover{
+        background: red;
+        transition: background ease .5s;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1> Enter Text Here to Speak </h1>
+        <div id="text-to-speech">
+            <textarea id="text"></textarea>
+            <button id="speak-button">Speak</button>
+        </div>
+    </div>
+    <script>
+        let textArea = document.getElementById("text");
+        let speakButton = document.getElementById("speak-button");
+        speakButton.addEventListener("click", function () {
+            let text = textArea.value;
+            let utterance = new SpeechSynthesisUtterance();
+            utterance.text = text;
+            utterance.voice = window.speechSynthesis.getVoices()[5];
+            window.speechSynthesis.speak(utterance);
+        },);
+
+    </script>
+</body>
+
+</html>
